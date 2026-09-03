@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Report Details</h2>
+
+    <div class="card shadow p-4">
+
+        <p><strong>Patient:</strong> {{ report.patient.name }}</p>
+        <p><strong>UHID:</strong> {{ report.patient.uhid }}</p>
+        <p><strong>Report Type:</strong> {{ report.report_type }}</p>
+
+        <hr>
+
+        <h5>AI Summary</h5>
+        <p>{{ report.ai_summary }}</p>
+
+        <h5>Doctor Remark</h5>
+        <p>{{ report.doctor_remark }}</p>
+
+        <hr>
+
+        <a class="btn btn-success" href="{{ report.report_file.url }}">
+            Download Report
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

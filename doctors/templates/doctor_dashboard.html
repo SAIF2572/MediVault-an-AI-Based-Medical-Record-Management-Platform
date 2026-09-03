@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="text-center">Doctor Dashboard</h2>
+
+    <!-- SEARCH -->
+    <form method="GET" class="mb-4">
+        <input type="text" name="uhid" placeholder="Enter UHID" class="form-control" required>
+        <button class="btn btn-primary mt-2">Search</button>
+    </form>
+
+    {% if patient %}
+        <h4>Patient: {{ patient.name }}</h4>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for report in reports %}
+            <tr>
+                <td>{{ report.id }}</td>
+                <td>{{ report.report_type }}</td>
+                
+                <td>
+
+    <!-- VIEW BUTTON -->
+    <a href="{% url 'view_report' report.id %}" class="btn btn-success btn-sm mb-2">
+        View
+    </a>
+
+    <!-- ADD REMARK BUTTON -->
+    <button class="btn btn-warning btn-sm mb-2"
+            onclick="toggleForm({{ report.id }})">
+        Add Remark
+    </button>
+
+    <!-- EXISTING REMARK -->
+    <p>
+        <strong>Remark:</strong>
+        {{ report.doctor_remark|default:"No remark yet" }}
+    </p>
+
+    <!-- HIDDEN FORM -->
+    <form method="POST" id="form-{{ report.id }}" style="display:none;">
+        {% csrf_token %}
+        <input type="hidden" name="report_id" value="{{ report.id }}">
+
+        <textarea name="remark" class="form-control mb-2"
+                  placeholder="Write remark...">{{ report.doctor_remark }}</textarea>
+
+        <button class="btn btn-primary btn-sm">Save</button>
+    </form>
+
+</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    {% endif %}
+
+</div>
+<script>
+function toggleForm(id) {
+    var form = document.getElementById("form-" + id);
+
+    if (form.style.display === "none") {
+        form.style.display = "block";
+    } else {
+        form.style.display = "none";
+    }
+}
+</script>
+
+{% endblock %}

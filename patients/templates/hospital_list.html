@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Select Hospital</h2>
+
+<div class="row">
+
+{% for hospital in hospitals %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h5 class="card-title">{{ hospital.name }}</h5>
+
+<p class="card-text">{{ hospital.location }}</p>
+
+<a href="/hospital/{{ hospital.id }}/departments/" class="btn btn-primary">
+Select Hospital
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

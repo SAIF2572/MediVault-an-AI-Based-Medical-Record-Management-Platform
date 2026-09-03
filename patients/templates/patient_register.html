@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container mt-5" style="max-width: 500px;">
+
+    <h2 class="text-center mb-4">Patient Registration</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Name -->
+        <input type="text" name="name" placeholder="Full Name"
+               class="form-control mb-3" required>
+
+        <!-- Age -->
+        <input type="number" name="age" placeholder="Age"
+               class="form-control mb-3" required>
+
+        <!-- Gender -->
+        <select name="gender" class="form-control mb-3" required>
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+
+        <!-- Address -->
+        <input type="text" name="address" placeholder="Address"
+               class="form-control mb-3" required>
+
+        <!-- Phone -->
+        <input type="text" name="phone" placeholder="Contact Number"
+               class="form-control mb-3" required>
+
+        <!-- Email 
+        <input type="email" name="email" placeholder="Email Address"
+               class="form-control mb-3" required>
+
+        <!-- Create Password -->
+        <input type="password" name="password" placeholder="Create Password"
+               class="form-control mb-3" required>
+
+        <button class="btn btn-primary w-100">Register</button>
+
+        <p class="text-center mt-3">
+            Already have an account?
+            <a href="/accounts/patient/login/">Login</a>
+        </p>
+
+        {% if error %}
+            <p class="text-danger text-center">{{ error }}</p>
+        {% endif %}
+
+    </form>
+
+</div>
+
+</body>
+</html>

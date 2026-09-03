@@ -1,0 +1,15 @@
+<h2>Add Doctor Remark</h2>
+
+<p>Report: {{ report.report_type }}</p>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<textarea name="remark" rows="4" cols="50"></textarea>
+
+<br><br>
+
+<button type="submit">Save Remark</button>
+
+</form>

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Patient Dashboard</h2>
+
+{% if patient %}
+
+<div class="card p-4 mt-3">
+    <h4>Name: {{ patient.name }}</h4>
+    <p>UHID: {{ patient.uhid }}</p>
+    <p>Age: {{ patient.age }}</p>
+    <p>Gender: {{ patient.gender }}</p>
+    <p>Phone: {{ patient.phone }}</p>
+    <p>Email: {{ patient.email }}</p>
+    <p>Doctor: {{ patient.doctor.name }}</p>
+</div>
+
+{% else %}
+<p>No patient data found</p>
+{% endif %}
+
+    <!-- SEARCH BOX -->
+    <form method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="uhid" class="form-control" placeholder="Enter UHID" required>
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    {% if patient %}
+
+    <!-- PATIENT INFO CARD -->
+    {% comment %} <div class="card shadow p-3 mb-4">
+        <h4>Patient Info</h4>
+        <p><strong>Name:</strong> {{ patient.name }}</p>
+        <p><strong>UHID:</strong> {{ patient.uhid }}</p>
+        <p><strong>Age:</strong> {{ patient.age }}</p>
+        <p><strong>Gender:</strong> {{ patient.gender }}</p>
+    </div> {% endcomment %}
+
+    <!-- REPORT COUNT -->
+    <div class="alert alert-info">
+        Total Reports: <strong>{{ reports|length }}</strong>
+    </div>
+
+    <!-- REPORT LIST -->
+    <div class="card shadow p-3">
+        <h4>Reports</h4>
+
+        {% if reports %}
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for report in reports %}
+                <tr>
+                    <td>{{ report.id }}</td>
+                    <td>{{ report.report_type }}</td>
+                    <td>
+                        <a href="{% url 'view_report' report.id %}" class="btn btn-success btn-sm">
+                            View
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        {% else %}
+            <p>No reports found.</p>
+        {% endif %}
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-md-6">
+
+<div class="card shadow-lg border-0">
+
+<div class="card-header bg-danger text-white text-center">
+<h4 class="mb-0">Lab Report Upload</h4>
+</div>
+
+<div class="card-body p-4">
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mt-3">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<div class="mb-3">
+<label class="form-label">Enter Patient UHID</label>
+<input class="form-control" type="text" name="uhid" placeholder="UHID-XXXXXXX" required>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Select Report File</label>
+<input class="form-control" type="file" name="report_file" required>
+</div>
+
+<button class="btn btn-danger w-100">
+<i class="bi bi-upload"></i> Upload Report
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+Doctors in {{ department.name }}
+</h2>
+
+<div class="row">
+
+{% for doctor in doctors %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h5 class="card-title">
+{{ doctor.name }}
+</h5>
+
+<p>
+{{ doctor.specialization }}
+</p>
+
+<a href="/accounts/register/?doctor={{ doctor.id }}" class="btn btn-primary">
+    Book Appointment
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

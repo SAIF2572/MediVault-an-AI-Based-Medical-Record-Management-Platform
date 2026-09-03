@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Report Viewer</h2>
+
+<div class="card shadow p-4">
+
+<p><strong>Report Type:</strong> {{ report.report_type }}</p>
+
+<p><strong>AI Category:</strong> {{ report.ai_category }}</p>
+
+<p><strong>AI Summary:</strong> {{ report.ai_summary }}</p>
+
+<p><strong>Doctor Remark:</strong> {{ report.doctor_remark }}</p>
+
+<p><strong>Uploaded At:</strong> {{ report.uploaded_at }}</p>
+
+<hr>
+
+<a class="btn btn-success" href="{{ report.report_file.url }}" target="_blank">
+    Open Report
+</a>
+<object data="{{ report.report_file.url }}" width="100%" height="500px"></object>
+</div>
+
+{% endblock %}
